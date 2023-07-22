@@ -46,6 +46,25 @@ There are a few reasons someone could want to self-host an instance of Discord. 
 24. From here, don't restart it anymore. It'll keep iterating over itself in order to download all files. This may take a while.
 25. Just wait. Let it run until all it outputs is `Pass [x] is done! (No output? It's probably done.)`. If it stops outputting anything for more than 10 seconds, restart it. As of writing (22/07/23), there are 5438 assets, but don't panic if you have more or less. That's normal since Discord isn't static.
 26. Once this has finished, go back into the `assets` directory from the saved webpage, copy the contents of it and paste it into the new `assets` directory in the cloned repository.
+27. Now, inside of the repository folder, run `npm i` to install the modules for the server. Then, run `node .` to run it. It should say `Server is running at http://localhost:3000`. If you now go to http://localhost:3000, you should hopefully see the Discord login page!
+
+## Fixing up index.html
+Is it broken? Does it complain about scripts in Devtools? Follow this guide.
+
+1. Open up index.html in a code editor of your choice.
+2. Find and replace any references to `</link>` to be empty.
+3. Format the file (optional, will make your life easier)
+4. Find each instance of `integrity` and remove the prop from the element it's on. This is because integrity won't hold up for our server.
+5. Remember the backend I warned you about earlier? This is where it comes in. If you run the frontend over HTTP, the backend also needs to use HTTP. The same goes for HTTPS.
+6. Look around the top of the file until you see something like this:
+
+![image](https://github.com/not-nullptr/discord-selfhosting-guide/assets/62841684/b18f6a93-877a-457c-9993-51bef7458361)
+
+7. Change the values to reflect your API. If you wrote your API for HTTPS you can forward both the frontend and backend through a Cloudflare tunnel in order to get HTTPS without doing anything extra.
+8. Voila! It should work now.
+
+# Other reasons to do this
+Following these steps is also an effective way to preserve historical Discord builds. By following these steps, you have a fully working, local build of Discord, frozen in time.
 
 # Legality?
 I'm not sure on the legal side of things. If this repository is taken down, there's your answer. With that being said, everything is legal till it isn't; laws are for horses. All software in this repository is free for you to redistribute, re-use and repurpose. It comes with no warranty, bla bla bla, but I'm happy to help you if it breaks. This isn't a must, but if you're feeling generous, please consider crediting me.
