@@ -4,7 +4,7 @@ const path = require("path");
 const mime = require("mime-types");
 const process = require("process");
 
-const port = process.argv[3] || 3000;
+const port = parseInt(process.argv[2]) || 3000;
 
 const server = http.createServer(async (req, res) => {
     const url = req.url === "/" ? "index.html" : req.url;
