@@ -37,9 +37,9 @@ const server = http.createServer(async (req, res) => {
         );
     } else {
         fs.readFile(
-            fs.existsSync("index.html.serve")
-                ? "index.html.serve"
-                : "index.html",
+            fs.existsSync(path.join(__dirname, "index.html.serve"))
+                ? path.join(__dirname, "index.html.serve")
+                : path.join(__dirname, "index.html"),
             (err, data) => {
                 if (err) {
                     res.writeHead(404, { "Content-Type": "text/plain" });
