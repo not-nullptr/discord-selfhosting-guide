@@ -4,11 +4,13 @@ const path = require("path");
 const mime = require("mime-types");
 const process = require("process");
 
+console.log(process.argv);
+
 const port = parseInt(process.argv[2]) || 3000;
 
 const server = http.createServer(async (req, res) => {
 	const url = req.url === "/" ? "index.html" : req.url;
-	const pathName = `${path.join(__dirname, path.normalize(url))}`;
+	const pathName = `./${path.normalize(url)}`;
 	console.log(pathName);
 	if (url.startsWith("/assets/")) {
 		fs.readFile(
@@ -24,9 +26,7 @@ const server = http.createServer(async (req, res) => {
 					});
 					res.end("404 Not Found");
 				} else {
-					const extension = path.extname(
-						`${path.join(__dirname, pathName)}`,
-					);
+					const extension = path.extname(pathName);
 					const contentType = getContentType(extension);
 					res.writeHead(200, {
 						"Content-Type": contentType,
