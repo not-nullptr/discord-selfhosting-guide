@@ -10,7 +10,7 @@ const port = parseInt(process.argv[2]) || 3000;
 
 const server = http.createServer(async (req, res) => {
     const url = req.url === "/" ? "index.html" : req.url;
-    const pathName = `../${path.normalize(url)}`;
+    const pathName = `./${path.normalize(url)}`;
     console.log(pathName);
     if (url.startsWith("/assets/")) {
         fs.readFile(
